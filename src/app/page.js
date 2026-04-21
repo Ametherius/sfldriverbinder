@@ -1,13 +1,17 @@
 "use client";
 
+import Book from "@/components/book";
 import ContentsMenu from "@/components/contentsMenu";
 import Header from "@/components/header";
+import { useFiles } from "@/hooks/useFiles";
 import Image from "next/image";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
+  const [files] = useFiles();
+  console.log(files);
 
   function handleToggler() {
     setIsOpen(!isOpen);
@@ -24,6 +28,9 @@ export default function Home() {
       <Header />
       <div className="relative">
         <ContentsMenu isOpen={isOpen} />
+      </div>
+      <div className="relative  w-full h-screen p-3">
+        <Book />
       </div>
     </div>
   );
