@@ -10,8 +10,9 @@ import { FaBars } from "react-icons/fa";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
-  const [files] = useFiles();
+  const { files, folders } = useFiles();
   console.log(files);
+  console.log(folders);
 
   function handleToggler() {
     setIsOpen(!isOpen);
