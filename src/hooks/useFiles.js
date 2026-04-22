@@ -7,7 +7,7 @@ export function useFiles() {
 
   async function files(path = "", fileAcc = [], folderAcc = []) {
     const { data, error } = await supabase.storage
-      .from("Driver Handbook")
+      .from("Driver-Handbook")
       .list(path || "", { limit: 1000 });
     if (error) throw error;
 
@@ -25,11 +25,23 @@ export function useFiles() {
     return { fileAcc, folderAcc };
   }
   useEffect(() => {
+    let cancelled = false;
     (async () => {
-      const { fileAcc, folderAcc } = await files("");
-      setAllFiles(fileAcc);
-      setAllFolders(folderAcc);
+      try {
+        const { fileAcc, folderAcc } = await files("");
+        if (!cancelled) {
+          setAllFiles(fileAcc);
+          setAllFolders(folderAcc);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          console.error("Failed to load files:", err);
+        }
+      }
     })();
+    return () => {
+      cancelled = true;
+    };
   }, []);
   return { files: allFiles, folders: allFolders };
 }
