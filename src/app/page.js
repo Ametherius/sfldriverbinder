@@ -4,6 +4,7 @@ import Book from "@/components/book";
 import ContentsMenu from "@/components/contentsMenu";
 import Header from "@/components/header";
 import { useFiles } from "@/hooks/useFiles";
+import { supabase } from "@/lib/supabase";
 import Image from "next/image";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
@@ -13,6 +14,9 @@ export default function Home() {
   const { files, folders } = useFiles();
   console.log(files);
   console.log(folders);
+
+  const titlePage = files.find((f) => f.name.toLowerCase().endsWith(".pdf"));
+  const pdfPath = titlePage?.path;
 
   function handleToggler() {
     setIsOpen(!isOpen);
@@ -30,9 +34,7 @@ export default function Home() {
       <div className="relative">
         <ContentsMenu isOpen={isOpen} />
       </div>
-      <div className="relative  w-full h-screen p-3">
-        <Book />
-      </div>
+      <div className="relative  w-full h-screen p-3"></div>
     </div>
   );
 }

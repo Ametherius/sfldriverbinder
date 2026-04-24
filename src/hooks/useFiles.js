@@ -7,7 +7,7 @@ export function useFiles() {
 
   async function files(path = "", fileAcc = [], folderAcc = []) {
     const { data, error } = await supabase.storage
-      .from("Driver-Handbook")
+      .from("Driver Handbook")
       .list(path || "", { limit: 1000 });
     if (error) throw error;
 
