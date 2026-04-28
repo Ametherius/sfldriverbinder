@@ -1,22 +1,16 @@
 "use client";
 
-import Book from "@/components/book";
 import ContentsMenu from "@/components/contentsMenu";
 import Header from "@/components/header";
-import { useFiles } from "@/hooks/useFiles";
-import { supabase } from "@/lib/supabase";
+import { useCMS } from "@/hooks/useCMS";
+import { sanity } from "@/sanity";
 import Image from "next/image";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
-  const { files, folders } = useFiles();
-  console.log(files);
-  console.log(folders);
-
-  const titlePage = files.find((f) => f.name.toLowerCase().endsWith(".pdf"));
-  const pdfPath = titlePage?.path;
+  const { data, error } = useCMS();
 
   function handleToggler() {
     setIsOpen(!isOpen);
@@ -32,9 +26,12 @@ export default function Home() {
       </button>
       <Header />
       <div className="relative">
-        <ContentsMenu isOpen={isOpen} />
+        <ContentsMenu isOpen={isOpen} cms={data} />
       </div>
-      <div className="relative  w-full h-screen p-3"></div>
+      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center flex-col items-center w-full p-3 h-auto">
+        <Image width={200} height={200} alt="Logo" src="/sfllogo.svg" />
+        <h1 className="font-bold text-2xl text-center">SFL Driver's Binder</h1>
+      </div>
     </div>
   );
 }
