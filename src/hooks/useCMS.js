@@ -31,7 +31,7 @@ export function useCMS() {
 
   useEffect(() => {
     getCMS();
-    const id = setInterval(getCMS, 50000);
+    const id = setInterval(getCMS, 2500);
     return () => clearInterval(id);
   }, []);
   return { data };
