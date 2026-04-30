@@ -4,16 +4,16 @@ export default function ContentsMenu({ isOpen, cms }) {
     typeof value === "string" ? value.slice(3) || value : "Untitled";
   return (
     <div
-      className={`w-60 border-r-4 border-green-950 z-20 fixed top-[headerHeight] left-0 bg-white h-screen overflow-y-scroll ${isOpen ? "" : "hidden"}`}
+      className={`w-60 border-r-4 border-green-950 z-20 fixed top-[72px] left-0 bg-white h-[calc(100vh-72px)] flex flex-col ${isOpen ? "" : "hidden"}`}
     >
       <div className="flex justify-center p-5">
         <h2 className="font-bold text-xl underline">Table Of Contents</h2>
       </div>
-      <div className="p-2">
+      <div className="p-2 overflow-y-auto flex-1">
         <ol>
           {cmsData.map((d) => (
             <li className="list-[numeric] ml-4 font-bold" key={d._id}>
-              {d.title.slice(3)}
+              {trimPrefix(d.title)}
 
               <ol type="a" className="list-[lower-alpha]">
                 {(d.files ?? []).map((file) => (
@@ -24,7 +24,7 @@ export default function ContentsMenu({ isOpen, cms }) {
                       rel="noopener noreferrer"
                       className="text-sm underline"
                     >
-                      {file.title.slice(3) ?? "View PDF"}
+                      {trimPrefix(file.title)}
                     </a>
                   </li>
                 ))}
