@@ -8,25 +8,28 @@ export default function ContentsMenu({ isOpen, cms }) {
         <h2 className="font-bold text-xl underline">Table Of Contents</h2>
       </div>
       <div className="p-2">
-        {cmsData.map((d) => (
-          <div key={d._id}>
-            <h3 className="pl-3 font-bold">{d.title}</h3>
-            <ol type="a" className="list-[lower-alpha]">
-              {(d.files ?? []).map((file) => (
-                <li key={file._id} className="ml-10 my-2">
-                  <a
-                    href={file?.file?.asset?.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm underline"
-                  >
-                    {file.title.slice(3) ?? "View PDF"}
-                  </a>
-                </li>
-              ))}
-            </ol>
-          </div>
-        ))}
+        <ol>
+          {cmsData.map((d) => (
+            <li className="list-[numeric] ml-4 font-bold" key={d._id}>
+              {d.title.slice(3)}
+
+              <ol type="a" className="list-[lower-alpha]">
+                {(d.files ?? []).map((file) => (
+                  <li key={file._id} className="ml-6 font-normal my-2">
+                    <a
+                      href={file?.file?.asset?.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm underline"
+                    >
+                      {file.title.slice(3) ?? "View PDF"}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </li>
+          ))}
+        </ol>
       </div>
     </div>
   );
