@@ -13,7 +13,7 @@ export default function ContentsMenu({ isOpen, cms }) {
         <ol>
           {cmsData.map((d) => (
             <li className="list-[numeric] ml-4 font-bold" key={d._id}>
-              {trimPrefix(d.title)}
+              {d.title.slice(3)}
 
               <ol type="a" className="list-[lower-alpha]">
                 {(d.files ?? []).map((file) => (
@@ -24,7 +24,7 @@ export default function ContentsMenu({ isOpen, cms }) {
                       rel="noopener noreferrer"
                       className="text-sm underline"
                     >
-                      {trimPrefix(file.title)}
+                      {file.title.slice(3) ?? "View PDF"}
                     </a>
                   </li>
                 ))}
