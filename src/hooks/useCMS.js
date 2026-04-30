@@ -5,10 +5,10 @@ import { sanity } from "@/sanity";
 export function useCMS() {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
-  const cmsData = `*[_type == "section"] | order(title asc){
+  const cmsData = `*[_type == "section"] | order(title desc, _createdAt desc){
   _id,
   title ,
-  "files": *[_type == "pdfUpload" && references(^._id)] | order(title asc){
+  "files": *[_type == "pdfUpload" && references(^._id)] | order(title desc, _createdAt desc){
     _id,
     title,
     file{
@@ -34,5 +34,5 @@ export function useCMS() {
     const id = setInterval(getCMS, 50000);
     return () => clearInterval(id);
   }, []);
-  return { data };
+  return { data, error };
 }

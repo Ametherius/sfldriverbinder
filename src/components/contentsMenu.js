@@ -1,5 +1,7 @@
 export default function ContentsMenu({ isOpen, cms }) {
   const cmsData = Array.isArray(cms) ? cms : [];
+  const trimPrefix = (value) =>
+    typeof value === "string" ? value.slice(3) || value : "Untitled";
   return (
     <div
       className={`w-60 border-r-4 border-green-950 z-20 fixed top-[headerHeight] left-0 bg-white h-screen overflow-y-scroll ${isOpen ? "" : "hidden"}`}
@@ -11,7 +13,7 @@ export default function ContentsMenu({ isOpen, cms }) {
         <ol>
           {cmsData.map((d) => (
             <li className="list-[numeric] ml-4 font-bold" key={d._id}>
-              {d.title.slice(3)}
+              {trimPrefix(d.title)}
 
               <ol type="a" className="list-[lower-alpha]">
                 {(d.files ?? []).map((file) => (
@@ -22,7 +24,7 @@ export default function ContentsMenu({ isOpen, cms }) {
                       rel="noopener noreferrer"
                       className="text-sm underline"
                     >
-                      {file.title.slice(3) ?? "View PDF"}
+                      {trimPrefix(file.title)}
                     </a>
                   </li>
                 ))}
