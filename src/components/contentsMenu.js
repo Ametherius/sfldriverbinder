@@ -4,7 +4,7 @@ export default function ContentsMenu({ isOpen, cms }) {
     typeof value === "string" ? value.slice(3) || value : "Untitled";
   return (
     <div
-      className={`w-60 border-r-4 border-green-950 z-20 fixed top-[72px] left-0 bg-white h-[calc(100dvh-72px)] max-h-[calc(100dvh-72px)] flex flex-col min-h-0 ${isOpen ? "" : "hidden"}`}
+      className={`w-80 border-r-4 border-green-950 z-20 fixed top-[72px] left-0 bg-white h-[calc(100dvh-72px)] max-h-[calc(100dvh-72px)] flex flex-col min-h-0 p-3 ${isOpen ? "" : "hidden"}`}
     >
       <div className="flex justify-center p-5">
         <h2 className="font-bold text-xl underline">Table Of Contents</h2>
